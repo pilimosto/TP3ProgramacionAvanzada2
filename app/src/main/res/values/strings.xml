@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TP3ProgramacionAvanzada2</string>
+     <string name="RegistrarUsuario">RegistrarUsuario</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="Nombre">Nombre</string>
+    <string name="CorreoElectronico">Correo Electronico</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="RepetirContraseña">Repetir Contraseña</string>
+    <string name="ParkingControl">Parking Control</string>
+
 </resources>

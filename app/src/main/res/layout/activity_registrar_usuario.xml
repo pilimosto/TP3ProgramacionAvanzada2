@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrarUsuario">
+    <include
+        layout="@layout/appbar"/>
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="119dp"
+        android:layout_height="122dp"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="132dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/registrarUsuario" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="219dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="168dp"
+        android:text="@string/Registrarse"
+        android:textColor="#2196F3"
+
+
+        android:textColorLink="#03A9F4"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNombreUsuario"
+        android:layout_width="348dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="272dp"
+        android:ems="10"
+
+        android:inputType="text"
+        android:text="@string/Nombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextCorreoElectronico"
+        android:layout_width="356dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+
+        android:ems="10"
+
+        android:inputType="text"
+        android:text="@string/Contraseña"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextContraseña" />
+
+    <EditText
+        android:id="@+id/editTextContraseña"
+        android:layout_width="354dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/CorreoElectronico"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombreUsuario" />
+
+    <EditText
+        android:id="@+id/editTextRepetirContraseña"
+        android:layout_width="354dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/RepetirContraseña"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreoElectronico" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="354dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRepetirContraseña" />
+
+    <TextView
+        android:id="@+id/textViewParkingControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/ParkingControl"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
