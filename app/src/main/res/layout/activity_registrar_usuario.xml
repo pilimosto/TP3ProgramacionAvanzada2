@@ -18,8 +18,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="132dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/registrarUsuario" />
+        app:layout_constraintTop_toTopOf="parent"/>
+        <!--app:srcCompat="@mipmap/registrarUsuario"-->
+
 
     <TextView
         android:id="@+id/textView"

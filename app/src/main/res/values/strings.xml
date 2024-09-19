@@ -1,11 +1,22 @@
 <resources>
     <string name="app_name">TP3ProgramacionAvanzada2</string>
-     <string name="RegistrarUsuario">RegistrarUsuario</string>
+    <string name="RegistrarUsuario">RegistrarUsuario</string>
     <string name="Registrarse">Registrarse</string>
     <string name="Nombre">Nombre</string>
     <string name="CorreoElectronico">Correo Electronico</string>
     <string name="Contraseña">Contraseña</string>
     <string name="RepetirContraseña">Repetir Contraseña</string>
     <string name="ParkingControl">Parking Control</string>
+    <string name="title_activity_menu_inicio">MenuInicio</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Usuario</string>
+    <string name="nav_header_subtitle">usuario@parking.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Parqueos</string>
+    <string name="menu_gallery">Mi cuenta</string>
+
 
 </resources>
