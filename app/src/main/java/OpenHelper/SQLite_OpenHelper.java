@@ -29,10 +29,12 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
     public void abrir(){
         this.getWritableDatabase();
     }
+
     //metdodo que permite cerrar la bd
     public void cerrar(){
         this.close();
     }
+
     //metodo que permite insertar registros en la tabla usuarios
     public void insertarReg(String nom, String cor, String pas){
         ContentValues valores=new ContentValues();
@@ -41,6 +43,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
         valores.put("Password", pas);
         this.getWritableDatabase().insert("usuarios", null, valores);
     }
+
     public boolean validarUsuario(String nombre, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
 

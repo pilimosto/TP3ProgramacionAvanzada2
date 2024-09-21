@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
             Contraseña= findViewById<EditText>(R.id.etContraseña)
             if (dbHelper.validarUsuario(etUsuario.text.toString(), Contraseña.text.toString())) {
                 val intent = Intent(applicationContext, MenuInicio::class.java)
+
+                intent.putExtra("Nombre", etUsuario.text.toString())
+
                 startActivity(intent)
                 Toast.makeText(this, "Usuario Valido", Toast.LENGTH_SHORT).show()
             } else {
