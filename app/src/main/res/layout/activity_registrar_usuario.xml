@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextCorreoElectronico"
+        android:id="@+id/editTextContrasenia"
         android:layout_width="356dp"
         android:layout_height="53dp"
         android:layout_marginStart="32dp"
@@ -62,10 +62,10 @@
         android:inputType="text"
         android:text="@string/Contraseña"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextContraseña" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
 
     <EditText
-        android:id="@+id/editTextContraseña"
+        android:id="@+id/editTextCorreo"
         android:layout_width="354dp"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
@@ -86,15 +86,15 @@
         android:inputType="text"
         android:text="@string/RepetirContraseña"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreoElectronico" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextContrasenia" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAceptar"
         android:layout_width="354dp"
         android:layout_height="59dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:text="Aceptar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextRepetirContraseña" />
 
