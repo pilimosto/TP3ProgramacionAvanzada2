@@ -38,6 +38,7 @@ class RegistrarUsuario : AppCompatActivity() {
 
         btnAceptar.setOnClickListener{
             helper.abrir()
+            if (helper.validarNombreUsuario(txtNombre.text.toString())){
             helper.insertarReg(txtNombre.text.toString(), txtCorreo.text.toString(), txtContrasena.text.toString())
             helper.cerrar()
 
@@ -45,7 +46,10 @@ class RegistrarUsuario : AppCompatActivity() {
 
 
             val i = Intent(applicationContext, MainActivity::class.java)
-            startActivity(i)
+            startActivity(i)}else{
+                Toast.makeText(applicationContext, "Nombre Usuario Invalido", Toast.LENGTH_SHORT).show()
+
+            }
         }
 
     }

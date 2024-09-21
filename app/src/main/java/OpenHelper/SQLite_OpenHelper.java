@@ -2,6 +2,7 @@ package OpenHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -39,5 +40,40 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
         valores.put("Correo", cor);
         valores.put("Password", pas);
         this.getWritableDatabase().insert("usuarios", null, valores);
+    }
+    public boolean validarUsuario(String nombre, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT Password FROM usuarios WHERE Nombre = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{nombre});
+
+
+        if (cursor.moveToFirst()) {
+            String storedPassword = cursor.getString(0);
+            cursor.close();
+            return storedPassword.equals(password);
+        }
+
+
+        cursor.close();
+        return false;
+    }
+    public boolean validarNombreUsuario(String nombre) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT Nombre FROM usuarios WHERE Nombre = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{nombre});
+
+
+        if (cursor.moveToFirst()) {
+            String NombreGuardado = cursor.getString(0);
+            cursor.close();
+             NombreGuardado.equals(nombre);
+             return false;
+        }
+
+
+        cursor.close();
+        return true;
     }
 }
