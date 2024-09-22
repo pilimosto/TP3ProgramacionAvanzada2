@@ -4,8 +4,11 @@ import OpenHelper.SQLite_OpenHelper
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
+import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -37,9 +40,32 @@ class MenuInicio : AppCompatActivity() {
         setSupportActionBar(binding.appBarMenuInicio.toolbar)
 
         binding.appBarMenuInicio.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+           /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
+            */
+            val inflater = layoutInflater
+            val vistaDialogo = inflater.inflate(R.layout.dialogo, null)
+
+            val dialogo = AlertDialog.Builder(this)
+                .setView(vistaDialogo)
+                .create()
+
+            val editTextTime = vistaDialogo.findViewById<EditText>(R.id.editTextTime)
+            val editTextMatricula = vistaDialogo.findViewById<EditText>(R.id.editTextTextPostalAddress)
+            val textViewCancelar = vistaDialogo.findViewById<TextView>(R.id.textViewCancelar)
+            val textViewRegistrar = vistaDialogo.findViewById<TextView>(R.id.textViewRegistrar)
+
+            textViewCancelar.setOnClickListener {
+                dialogo.dismiss()
+            }
+
+            textViewRegistrar.setOnClickListener {
+                dialogo.dismiss()
+            }
+
+            dialogo.show()
+
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -91,5 +117,7 @@ class MenuInicio : AppCompatActivity() {
             Toast.makeText(applicationContext, "El registro no existe", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
 }
