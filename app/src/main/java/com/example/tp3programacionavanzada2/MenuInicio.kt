@@ -41,6 +41,11 @@ class MenuInicio : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMenuInicio.toolbar)
 
+        val intent = intent
+        nombre = intent.getStringExtra("Nombre") ?: ""
+
+        val idUsuario = obtenerIdUsuario(nombre)
+
         binding.appBarMenuInicio.fab.setOnClickListener { view ->
            /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
@@ -63,21 +68,15 @@ class MenuInicio : AppCompatActivity() {
             }
 
             textViewRegistrar.setOnClickListener {
-                dialogo.dismiss()
-
                 helper.abrir()
-                if (helper.validarMatricula(editTextMatricula.text.toString())){
-                    helper.insertarParq(editTextMatricula.text.toString(), editTextTime.text.toString())
-                    helper.cerrar()
+                //if (helper.validarMatricula(editTextMatricula.text.toString())){
+                    helper.insertarParq(editTextMatricula.text.toString(), editTextTime.text.toString(), idUsuario)
 
                     Toast.makeText(applicationContext, "Parqueo almacenado con éxito", Toast.LENGTH_SHORT).show()
 
-
-                    val i = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(i)}else{
-                    Toast.makeText(applicationContext, "Parqueo Invalido", Toast.LENGTH_SHORT).show()
-
-                }
+                //}
+                helper.cerrar()
+                dialogo.dismiss()
             }
 
             dialogo.show()
@@ -90,9 +89,6 @@ class MenuInicio : AppCompatActivity() {
         val headerView = navView.getHeaderView(0)
         tvUsuario = headerView.findViewById(R.id.TextViewUsuario)
         tvCorreo = headerView.findViewById(R.id.TextViewCorreo)
-
-        val intent = intent
-        nombre = intent.getStringExtra("Nombre") ?: ""
 
         consultarDatos()
 
@@ -134,6 +130,23 @@ class MenuInicio : AppCompatActivity() {
         }
     }
 
+    fun obtenerIdUsuario(nombre: String): Int {
+        val db = helper.readableDatabase
+        var usuarioId = -1
+
+        val query = "SELECT _ID FROM usuarios WHERE Nombre = ?"
+        val cursor = db.rawQuery(query, arrayOf(nombre))
+
+        try {
+            if (cursor.moveToFirst()) {
+                usuarioId = cursor.getInt(0)
+                cursor.close()
+            }
+        }catch (e: Exception){
+            Toast.makeText(applicationContext, "El registro no existe", Toast.LENGTH_SHORT).show()
+        }
+        return usuarioId
+    }
 
 
 }

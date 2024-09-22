@@ -18,7 +18,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String query= "create table usuarios(_ID integer primary key autoincrement, Nombre text, Correo text, Password text);";
         sqLiteDatabase.execSQL(query);
-        String query2= "create table parqueos(_ID integer primary key autoincrement, NroMatricula text, Tiempo text);";
+        String query2= "create table parqueos(_ID integer primary key autoincrement, NroMatricula text, Tiempo text, Usuario_ID integer, foreign key(Usuario_ID) references usuarios(_ID));";
         sqLiteDatabase.execSQL(query2);
     }
 
@@ -83,10 +83,11 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
     }
 
     //metodo que permite insertar registros en la tabla usuarios
-    public void insertarParq(String nro, String tiem){
+    public void insertarParq(String nro, String tiem, int id){
         ContentValues valores=new ContentValues();
         valores.put("NroMatricula", nro);
         valores.put("Tiempo", tiem);
+        valores.put("Usuario_ID", id);
         this.getWritableDatabase().insert("parqueos", null, valores);
     }
 
