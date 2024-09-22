@@ -1,6 +1,7 @@
 package com.example.tp3programacionavanzada2
 
 import OpenHelper.SQLite_OpenHelper
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
@@ -28,6 +29,7 @@ class MenuInicio : AppCompatActivity() {
     private lateinit var tvUsuario: TextView
     private lateinit var tvCorreo: TextView
     private lateinit var nombre: String
+
 
     val helper = SQLite_OpenHelper(this, "BD1", null, 1)
 
@@ -62,6 +64,20 @@ class MenuInicio : AppCompatActivity() {
 
             textViewRegistrar.setOnClickListener {
                 dialogo.dismiss()
+
+                helper.abrir()
+                if (helper.validarMatricula(editTextMatricula.text.toString())){
+                    helper.insertarParq(editTextMatricula.text.toString(), editTextTime.text.toString())
+                    helper.cerrar()
+
+                    Toast.makeText(applicationContext, "Parqueo almacenado con éxito", Toast.LENGTH_SHORT).show()
+
+
+                    val i = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(i)}else{
+                    Toast.makeText(applicationContext, "Parqueo Invalido", Toast.LENGTH_SHORT).show()
+
+                }
             }
 
             dialogo.show()

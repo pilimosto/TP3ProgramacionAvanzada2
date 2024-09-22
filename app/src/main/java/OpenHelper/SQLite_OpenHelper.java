@@ -18,6 +18,8 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String query= "create table usuarios(_ID integer primary key autoincrement, Nombre text, Correo text, Password text);";
         sqLiteDatabase.execSQL(query);
+        String query2= "create table parqueos(_ID integer primary key autoincrement, NroMatricula text, Tiempo text);";
+        sqLiteDatabase.execSQL(query2);
     }
 
     @Override
@@ -73,6 +75,34 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
             cursor.close();
              NombreGuardado.equals(nombre);
              return false;
+        }
+
+
+        cursor.close();
+        return true;
+    }
+
+    //metodo que permite insertar registros en la tabla usuarios
+    public void insertarParq(String nro, String tiem){
+        ContentValues valores=new ContentValues();
+        valores.put("NroMatricula", nro);
+        valores.put("Tiempo", tiem);
+        this.getWritableDatabase().insert("parqueos", null, valores);
+    }
+
+
+    public boolean validarMatricula(String matricula) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT NroMatricula FROM parqueos WHERE NroMatricula = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{matricula});
+
+
+        if (cursor.moveToFirst()) {
+            String MatriculaGuardada = cursor.getString(0);
+            cursor.close();
+            MatriculaGuardada.equals(matricula);
+            return false;
         }
 
 
