@@ -4,6 +4,7 @@ import OpenHelper.SQLite_OpenHelper
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.ViewGroup
 import android.widget.EditText
@@ -47,10 +48,7 @@ class MenuInicio : AppCompatActivity() {
         val idUsuario = obtenerIdUsuario(nombre)
 
         binding.appBarMenuInicio.fab.setOnClickListener { view ->
-           /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
-            */
+
             val inflater = layoutInflater
             val vistaDialogo = inflater.inflate(R.layout.dialogo, null)
 
@@ -69,12 +67,12 @@ class MenuInicio : AppCompatActivity() {
 
             textViewRegistrar.setOnClickListener {
                 helper.abrir()
-                //if (helper.validarMatricula(editTextMatricula.text.toString())){
+
                     helper.insertarParq(editTextMatricula.text.toString(), editTextTime.text.toString(), idUsuario)
 
                     Toast.makeText(applicationContext, "Parqueo almacenado con éxito", Toast.LENGTH_SHORT).show()
 
-                //}
+
                 helper.cerrar()
                 dialogo.dismiss()
             }
@@ -145,6 +143,7 @@ class MenuInicio : AppCompatActivity() {
         }catch (e: Exception){
             Toast.makeText(applicationContext, "El registro no existe", Toast.LENGTH_SHORT).show()
         }
+        Log.d("DEBUG", "ID Usuario obtenido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: $usuarioId")
         return usuarioId
     }
 

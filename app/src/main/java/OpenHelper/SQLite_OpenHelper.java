@@ -28,8 +28,18 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
     }
 
     //metodo que permite abrir la bd
-    public void abrir(){
+    public void abrir( ){
+
+
         this.getWritableDatabase();
+
+
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        db.execSQL("PRAGMA foreign_keys=ON;");
     }
 
     //metdodo que permite cerrar la bd
