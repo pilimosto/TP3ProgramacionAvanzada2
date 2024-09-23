@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.GridView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +24,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tp3programacionavanzada2.databinding.ActivityMenuInicioBinding
+import com.example.tp3programacionavanzada2.ui.CustomGridAdapter
 
 class MenuInicio : AppCompatActivity() {
 
@@ -47,6 +50,9 @@ class MenuInicio : AppCompatActivity() {
         nombre = intent.getStringExtra("Nombre") ?: ""
 
         val idUsuario = obtenerIdUsuario(nombre)
+        cargarGrid(idUsuario.toString())
+
+
 
         binding.appBarMenuInicio.fab.setOnClickListener { view ->
 
@@ -72,7 +78,7 @@ class MenuInicio : AppCompatActivity() {
                     helper.insertarParq(editTextMatricula.text.toString(), editTextTime.text.toString(), idUsuario)
 
                     Toast.makeText(applicationContext, "Parqueo almacenado con éxito", Toast.LENGTH_SHORT).show()
-
+                cargarGrid(idUsuario.toString())
 
                 helper.cerrar()
                 dialogo.dismiss()
@@ -92,8 +98,7 @@ class MenuInicio : AppCompatActivity() {
 
         consultarDatos()
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_gallery
@@ -101,6 +106,9 @@ class MenuInicio : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -113,7 +121,7 @@ class MenuInicio : AppCompatActivity() {
             R.id.itemCerrarSesion -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()  // Cierra la actividad actual
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -157,8 +165,21 @@ class MenuInicio : AppCompatActivity() {
         }catch (e: Exception){
             Toast.makeText(applicationContext, "El registro no existe", Toast.LENGTH_SHORT).show()
         }
-        Log.d("DEBUG", "ID Usuario obtenido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: $usuarioId")
+
         return usuarioId
+    }
+    private fun cargarGrid(id:String){
+        val dataList = helper.getMatriculaYTiempo(id)
+        val gridView: GridView = findViewById(R.id.GVParqueos)
+        val pairedList = mutableListOf<Pair<String, String>>()
+        for (i in dataList.indices step 2) {
+            if (i + 1 < dataList.size) {
+                pairedList.add(Pair(dataList[i], dataList[i + 1]))
+            }
+        }
+
+        val adapter = CustomGridAdapter(this, pairedList)
+        gridView.adapter = adapter
     }
 
 

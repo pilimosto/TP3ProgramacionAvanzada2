@@ -18,6 +18,7 @@ class RegistrarUsuario : AppCompatActivity() {
     lateinit var txtNombre:EditText
     lateinit var txtCorreo:EditText
     lateinit var txtContrasena:EditText
+    lateinit var txtContrasena2:EditText
 
     val helper = SQLite_OpenHelper(this, "BD1", null, 1)
 
@@ -35,18 +36,25 @@ class RegistrarUsuario : AppCompatActivity() {
         txtNombre = findViewById(R.id.editTextNombreUsuario)
         txtCorreo = findViewById(R.id.editTextCorreo)
         txtContrasena= findViewById(R.id.editTextContrasenia)
+        txtContrasena2= findViewById(R.id.editTextRepetirContraseña)
 
         btnAceptar.setOnClickListener{
             helper.abrir()
-            if (helper.validarNombreUsuario(txtNombre.text.toString())){
-            helper.insertarReg(txtNombre.text.toString(), txtCorreo.text.toString(), txtContrasena.text.toString())
-            helper.cerrar()
+            if (helper.validarNombreUsuario(txtNombre.text.toString()) ){
+                if(txtContrasena.text.toString() == txtContrasena2.text.toString()){
+                    helper.insertarReg(txtNombre.text.toString(), txtCorreo.text.toString(), txtContrasena.text.toString())
+                    helper.cerrar()
 
-            Toast.makeText(applicationContext, "Registro almacenado con éxito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Registro almacenado con éxito", Toast.LENGTH_SHORT).show()
 
 
-            val i = Intent(applicationContext, MainActivity::class.java)
-            startActivity(i)}else{
+                    val i = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(i)
+                }else{
+                    Toast.makeText(applicationContext, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show()
+                }
+
+            }else{
                 Toast.makeText(applicationContext, "Nombre Usuario Invalido", Toast.LENGTH_SHORT).show()
 
             }

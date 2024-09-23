@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SQLite_OpenHelper extends SQLiteOpenHelper {
 
     public SQLite_OpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -27,7 +30,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
 
     }
 
-    //metodo que permite abrir la bd
+
     public void abrir( ){
 
 
@@ -36,24 +39,44 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
 
     }
 
+
+
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
         db.execSQL("PRAGMA foreign_keys=ON;");
     }
 
-    //metdodo que permite cerrar la bd
+
     public void cerrar(){
         this.close();
     }
 
-    //metodo que permite insertar registros en la tabla usuarios
     public void insertarReg(String nom, String cor, String pas){
         ContentValues valores=new ContentValues();
         valores.put("Nombre", nom);
         valores.put("Correo", cor);
         valores.put("Password", pas);
         this.getWritableDatabase().insert("usuarios", null, valores);
+    }
+    public List<String> getMatriculaYTiempo(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT NroMatricula, Tiempo FROM parqueos WHERE _ID = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+        List<String> dataList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                String nroMatricula = cursor.getString(cursor.getColumnIndexOrThrow("NroMatricula"));
+                String tiempo = cursor.getString(cursor.getColumnIndexOrThrow("Tiempo"));
+
+
+                dataList.add(nroMatricula);
+                dataList.add(tiempo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return dataList;
     }
 
     public boolean validarUsuario(String nombre, String password) {
@@ -92,7 +115,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    //metodo que permite insertar registros en la tabla usuarios
+
     public void insertarParq(String nro, String tiem, int id){
         ContentValues valores=new ContentValues();
         valores.put("NroMatricula", nro);
@@ -120,4 +143,8 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return true;
     }
+
+
+
 }
+
