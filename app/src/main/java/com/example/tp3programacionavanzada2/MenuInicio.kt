@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
@@ -88,6 +89,7 @@ class MenuInicio : AppCompatActivity() {
         tvUsuario = headerView.findViewById(R.id.TextViewUsuario)
         tvCorreo = headerView.findViewById(R.id.TextViewCorreo)
 
+
         consultarDatos()
 
         // Passing each menu ID as a set of Ids because each
@@ -102,10 +104,22 @@ class MenuInicio : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_inicio, menu)
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.itemCerrarSesion -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()  // Cierra la actividad actual
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_menu_inicio)
@@ -146,6 +160,8 @@ class MenuInicio : AppCompatActivity() {
         Log.d("DEBUG", "ID Usuario obtenido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: $usuarioId")
         return usuarioId
     }
+
+
 
 
 }
