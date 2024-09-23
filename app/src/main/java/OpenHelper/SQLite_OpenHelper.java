@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -61,7 +62,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
     }
     public List<String> getMatriculaYTiempo(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT NroMatricula, Tiempo FROM parqueos WHERE _ID = ?";
+        String query = "SELECT NroMatricula, Tiempo FROM parqueos WHERE Usuario_ID = ?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
         List<String> dataList = new ArrayList<>();
 
@@ -75,7 +76,9 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper {
                 dataList.add(tiempo);
             } while (cursor.moveToNext());
         }
+
         cursor.close();
+
         return dataList;
     }
 
