@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
         val toolbar:Toolbar=findViewById<Toolbar>(R.id.miToolBar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = "Parking control"
         txtRegistrarse = findViewById<TextView>(R.id.tvRegistrarse)
         btnIniciarSesion =findViewById<Button>(R.id.btnIniciarSesion)
         txtRegistrarse.setOnClickListener{

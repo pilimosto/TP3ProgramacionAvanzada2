@@ -74,14 +74,17 @@ class MenuInicio : AppCompatActivity() {
 
             textViewRegistrar.setOnClickListener {
                 helper.abrir()
+                    if(editTextMatricula.text.toString().isNotEmpty() && editTextTime.text.toString().isNotEmpty()) {
 
-                    helper.insertarParq(editTextMatricula.text.toString(), editTextTime.text.toString(), idUsuario)
+                        helper.insertarParq(editTextMatricula.text.toString().trim(), editTextTime.text.toString().trim(), idUsuario)
+                        Toast.makeText(applicationContext, "Parqueo almacenado con éxito", Toast.LENGTH_SHORT).show()
+                        cargarGrid(idUsuario.toString())
+                        dialogo.dismiss()
 
-                    Toast.makeText(applicationContext, "Parqueo almacenado con éxito", Toast.LENGTH_SHORT).show()
-                cargarGrid(idUsuario.toString())
-
+                    } else{
+                        Toast.makeText(applicationContext, "Campos de texto vacíos", Toast.LENGTH_SHORT).show()
+                    }
                 helper.cerrar()
-                dialogo.dismiss()
             }
 
             dialogo.show()
